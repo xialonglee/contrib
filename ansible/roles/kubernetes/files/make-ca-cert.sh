@@ -103,8 +103,11 @@ fi
 sans=$(IFS=, ; echo "${san_array[*]}")
 
 curl -sSL -O https://storage.googleapis.com/kubernetes-release/easy-rsa/easy-rsa.tar.gz
-tar xzf easy-rsa.tar.gz
-cd easy-rsa-master/easyrsa3
+#tar xzf easy-rsa.tar.gz
+#cd easy-rsa-master/easyrsa3
+cp ${EASY_RSA_PATH}/easy-rsa3.0.1.tar.gz .
+tar xzf easy-rsa3.0.1.tar.gz
+cd easy-rsa-3.0.1/easyrsa3
 
 # Sadly, openssl is very verbose to std*err* with no option to turn it off.
 if ! (./easyrsa --batch init-pki

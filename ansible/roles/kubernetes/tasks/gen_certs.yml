@@ -22,6 +22,11 @@
     mode=0500
   changed_when: false
 
+- name: Copy easy-rsa to run
+  copy:
+    src=easy-rsa3.0.1.tar.gz
+    dest={{ kube_script_dir }}
+
 # FIXME This only generates a cert for one master...
 - name: Run create cert script on master
   command:
@@ -38,6 +43,7 @@
     HTTP_PROXY: "{{ http_proxy|default('') }}"
     HTTPS_PROXY: "{{ https_proxy|default('') }}"
     CLUSTER_HOSTNAME: "{{ master_cluster_hostname |default('') }}"
+    EASY_RSA_PATH: "{{ kube_script_dir }}"
 
 - name: Verify certificate permissions
   file:
