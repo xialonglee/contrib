@@ -41,6 +41,9 @@ kube_cert_ip: "{{ hostvars[inventory_hostname]['ansible_all_ipv4_addresses'] | j
 # This is where all of the bearer tokens will be stored
 kube_token_dir: "{{ kube_config_dir }}/tokens"
 
+# This dir is created for testing
+kube_token_dir2: "{{ kube_config_dir }}/tokens2"
+
 # This is where you can drop yaml/json files and the kubelet will run those
 # pods on startup
 kube_manifest_dir: "{{ kube_config_dir }}/manifests"
