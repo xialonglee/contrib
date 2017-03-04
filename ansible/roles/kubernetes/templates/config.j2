@@ -19,9 +19,5 @@ KUBE_LOG_LEVEL="--v=0"
 # Should this cluster be allowed to run privileged docker containers
 KUBE_ALLOW_PRIV="--allow-privileged=true"
 
-# How the controller-manager, scheduler, and proxy find the apiserver
-{% if cluster_hostname | default("") != "" %}
-KUBE_MASTER="--master=https://{{ cluster_hostname }}:{{ cluster_port }}"
-{% else %}
-KUBE_MASTER="--master=https://{{ groups['masters'][0] }}:{{ kube_master_api_port }}"
-{% endif %}
+# How the controller-manager and scheduler find the apiserver
+KUBE_MASTER="--master=https://{{ inventory_hostname }}:{{ kube_master_api_port }}"

@@ -5,3 +5,10 @@
 
 # Add your own!
 KUBE_PROXY_ARGS="--kubeconfig={{ kube_config_dir }}/proxy.kubeconfig"
+
+# This KUBE_MASTER will override the same variable defined in {{ kube_config_dir }}/config
+{% if cluster_hostname | default("") != "" %}
+KUBE_MASTER="--master=https://{{ cluster_hostname }}:{{ cluster_port }}"
+{% else %}
+KUBE_MASTER="--master=https://{{ groups['masters'][0] }}:{{ kube_master_api_port }}"
+{% endif %}
